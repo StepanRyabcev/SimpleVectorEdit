@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
     QObject::connect(ui->save, &QAction::triggered, this, MainWindow::save);
     QObject::connect(ui->load, &QAction::triggered, this, MainWindow::load);
+    QObject::connect(ui->savequick, &QAction::triggered, this, MainWindow::save_quick);
     ui->graphicsView->show();
     QPalette palwhite = ui->white->palette();
     palwhite.setColor(QPalette::Button, QColor(Qt::white));
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     palred.setColor(QPalette::Button, QColor(Qt::red));
     ui->red->setAutoFillBackground(true);
     ui->red->setPalette(palred);
+    ui->savequick->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -89,16 +91,36 @@ void MainWindow::on_red_clicked()
 
 void MainWindow::save()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, ("Open File"), "/home", ("Some File(*.mgf)"));
-    scene->saveToFile(fileName);
+    fileName = QFileDialog::getSaveFileName(this, ("Open File"), "/home", ("Some File(*.mgf)"));
+    if (!fileName.isEmpty())
+    {
+        fileName_b = fileName;
+        ui->savequick->setEnabled(true);
+        scene->saveToFile(fileName);
+    }
+    else
+        fileName = fileName_b;
 }
 
 void MainWindow::load()
 {
-    delete scene;
-    scene = new GraphicsScene;
-    QString fileName = QFileDialog::getOpenFileName(this, ("Open File"), "/home", ("Some File(*.mgf)"));
-    scene->loadFromFile(fileName);
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->show();
+    fileName = QFileDialog::getOpenFileName(this, ("Open File"), "/home", ("Some File(*.mgf)"));
+    if (!fileName.isEmpty())
+    {
+        fileName_b = fileName;
+        delete scene;
+        scene = new GraphicsScene;
+        scene->loadFromFile(fileName);
+        ui->savequick->setEnabled(true);
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->show();
+    }
+    else
+        fileName = fileName_b;
+}
+
+void MainWindow::save_quick()
+{
+    if (!fileName.isEmpty())
+        scene->saveToFile(fileName);
 }

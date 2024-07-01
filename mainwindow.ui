@@ -135,6 +135,7 @@
      <string>Файл</string>
     </property>
     <addaction name="save"/>
+    <addaction name="savequick"/>
     <addaction name="load"/>
    </widget>
    <addaction name="menu"/>
@@ -142,12 +143,17 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="save">
    <property name="text">
-    <string>Сохранить</string>
+    <string>Сохранить в</string>
    </property>
   </action>
   <action name="load">
    <property name="text">
     <string>Загрузить</string>
+   </property>
+  </action>
+  <action name="savequick">
+   <property name="text">
+    <string>Сохранить</string>
    </property>
   </action>
  </widget>

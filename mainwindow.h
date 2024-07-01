@@ -35,9 +35,12 @@ private slots:
 
     void load();
 
+    void save_quick();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;
     GraphicsScene *scene;
+    QString fileName, fileName_b;
 };
 #endif // MAINWINDOW_H
