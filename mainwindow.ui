@@ -145,7 +145,15 @@
     <addaction name="clear"/>
     <addaction name="undo"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Примитивы</string>
+    </property>
+    <addaction name="rect"/>
+    <addaction name="diamond"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_3"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -172,6 +180,16 @@
   <action name="undo">
    <property name="text">
     <string>Отмена правки</string>
+   </property>
+  </action>
+  <action name="rect">
+   <property name="text">
+    <string>Прямоугольник</string>
+   </property>
+  </action>
+  <action name="diamond">
+   <property name="text">
+    <string>Ромб</string>
    </property>
   </action>
  </widget>

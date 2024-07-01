@@ -41,10 +41,15 @@ private slots:
 
     void undo();
 
+    void rect();
+
+    void diamond();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;
     GraphicsScene *scene;
     QString fileName, fileName_b;
+    int primit = 1; //1 - прямоугольник, 2 - ромб
 };
 #endif // MAINWINDOW_H

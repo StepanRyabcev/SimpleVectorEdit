@@ -8,14 +8,29 @@
 #include <QFile>
 
 void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    if (primit == 1)
+    {
     if (event->button() == Qt::LeftButton) {
         m_startPos = event->scenePos();
         m_currentRect = addRect(m_startPos.x(), m_startPos.y(), 0, 0);
         m_currentRect->setBrush(cl);
     }
+    }
+    if (primit == 2)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            QPointF position = event->scenePos();
+            double a = position.x();
+            double b = position.y();
+            drawDiamond(a, b, 50.0, 50.0); // Размеры ромба по умолчанию: 50x50
+        }
+    }
 }
 
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
+    if (primit == 1)
+    {
     if (m_currentRect && event->buttons() & Qt::LeftButton) {
         qreal width = qAbs(event->scenePos().x() - m_startPos.x());
         qreal height = qAbs(event->scenePos().y() - m_startPos.y());
@@ -30,9 +45,20 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
         rect = QRectF(x, y, width, height);
         m_currentRect->setRect(rect);
     }
+    }
+    if (primit == 2)
+    {
+        if (event->buttons() & Qt::LeftButton)
+        {
+            QPointF position = event->scenePos();
+            drawDiamond(position.x(), position.y(), 50, 50); // Размеры ромба по умолчанию: 50x50
+        }
+    }
 }
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
+    if (primit == 1)
+    {
     if (m_currentRect && event->button() == Qt::LeftButton) {
         rectv_b.push(rectv);
         colorv_b.push(colorv);
@@ -40,6 +66,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         rectv.push_back(rect);
         colorv.push_back(cl);
         m_currentRect = nullptr;
+    }
     }
 }
 
@@ -97,4 +124,9 @@ void GraphicsScene::undo()
         rectitmv.push_back(m_currentRect);
     }
     }
+}
+
+void GraphicsScene::changePrimitive(int a)
+{
+    primit = a;
 }
