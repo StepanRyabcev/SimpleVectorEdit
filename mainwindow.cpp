@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->save, &QAction::triggered, this, MainWindow::save);
     QObject::connect(ui->load, &QAction::triggered, this, MainWindow::load);
     QObject::connect(ui->savequick, &QAction::triggered, this, MainWindow::save_quick);
+    QObject::connect(ui->clear, &QAction::triggered, this, MainWindow::clear);
     ui->graphicsView->show();
     QPalette palwhite = ui->white->palette();
     palwhite.setColor(QPalette::Button, QColor(Qt::white));
@@ -123,4 +124,12 @@ void MainWindow::save_quick()
 {
     if (!fileName.isEmpty())
         scene->saveToFile(fileName);
+}
+
+void MainWindow::clear()
+{
+    delete scene;
+    scene = new GraphicsScene;
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
 }

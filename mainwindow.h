@@ -37,6 +37,8 @@ private slots:
 
     void save_quick();
 
+    void clear();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;

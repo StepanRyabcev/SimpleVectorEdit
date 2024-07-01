@@ -138,7 +138,14 @@
     <addaction name="savequick"/>
     <addaction name="load"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Правка</string>
+    </property>
+    <addaction name="clear"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="save">
@@ -154,6 +161,11 @@
   <action name="savequick">
    <property name="text">
     <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="clear">
+   <property name="text">
+    <string>Очистить</string>
    </property>
   </action>
  </widget>
