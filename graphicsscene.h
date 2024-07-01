@@ -22,13 +22,17 @@ public:
     void saveToFile(QString);
 
     void loadFromFile(QString);
+
+    void undo();
+
 private:
     QPointF m_startPos;
     QGraphicsRectItem *m_currentRect = nullptr;
     QColor cl = Qt::blue;
     QRectF rect;
-    QVector<QRectF> rectv;
-    QVector<QColor> colorv;
+    QVector<QGraphicsRectItem*> rectitmv;
+    QVector<QRectF> rectv, rectv_b;
+    QVector<QColor> colorv, colorv_b;
 };
 
 #endif // GRAPHICSSCENE_H

@@ -39,6 +39,8 @@ private slots:
 
     void clear();
 
+    void undo();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;

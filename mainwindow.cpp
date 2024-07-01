@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->load, &QAction::triggered, this, MainWindow::load);
     QObject::connect(ui->savequick, &QAction::triggered, this, MainWindow::save_quick);
     QObject::connect(ui->clear, &QAction::triggered, this, MainWindow::clear);
+    QObject::connect(ui->undo, &QAction::triggered, this, MainWindow::undo);
     ui->graphicsView->show();
     QPalette palwhite = ui->white->palette();
     palwhite.setColor(QPalette::Button, QColor(Qt::white));
@@ -132,4 +133,9 @@ void MainWindow::clear()
     scene = new GraphicsScene;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
+}
+
+void MainWindow::undo()
+{
+    scene->undo();
 }

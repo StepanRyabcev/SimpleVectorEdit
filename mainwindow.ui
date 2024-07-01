@@ -143,6 +143,7 @@
      <string>Правка</string>
     </property>
     <addaction name="clear"/>
+    <addaction name="undo"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -166,6 +167,11 @@
   <action name="clear">
    <property name="text">
     <string>Очистить</string>
+   </property>
+  </action>
+  <action name="undo">
+   <property name="text">
+    <string>Отмена правки</string>
    </property>
   </action>
  </widget>

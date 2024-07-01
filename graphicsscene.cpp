@@ -34,6 +34,9 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     if (m_currentRect && event->button() == Qt::LeftButton) {
+        rectv_b = rectv;
+        colorv_b = colorv;
+        rectitmv.push_back(m_currentRect);
         rectv.push_back(rect);
         colorv.push_back(cl);
         m_currentRect = nullptr;
@@ -51,10 +54,7 @@ void GraphicsScene::saveToFile(QString fileName)
     if (file.open(QIODevice::WriteOnly))
     {
         QDataStream stream(&file);
-        for (int i = 0; i < rectv.size(); i++)
-        {
-            stream << rectv[i] << colorv[i];
-        }
+        stream << rectv << colorv;
         file.close();
     }
 }
@@ -65,16 +65,29 @@ void GraphicsScene::loadFromFile(QString fileName)
     if (file.open(QIODevice::ReadOnly))
     {
         QDataStream stream(&file);
-        while(!stream.atEnd())
+        stream >> rectv >> colorv;
+        for (int i = 0; i < rectv.size(); i++)
         {
-            QRectF rct;
-            QColor cll;
-            stream >> rct >> cll;
-            m_currentRect = addRect(rct);
-            m_currentRect->setBrush(cll);
-            rectv.push_back(rct);
-            colorv.push_back(cll);
+            m_currentRect = addRect(rectv[i]);
+            m_currentRect->setBrush(colorv[i]);
         }
         file.close();
+    }
+}
+
+void GraphicsScene::undo()
+{
+    for (int i = 0; i < rectitmv.size(); i++)
+    {
+        removeItem(rectitmv[i]);
+        delete rectitmv[i];
+    }
+    rectv.clear();
+    colorv.clear();
+    rectitmv.clear();
+    for (int i = 0; i < rectv_b.size(); i++)
+    {
+        m_currentRect = addRect(rectv_b[i]);
+        m_currentRect->setBrush(colorv_b[i]);
     }
 }
