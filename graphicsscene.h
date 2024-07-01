@@ -7,6 +7,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QRectF>
+#include <QStack>
 
 class GraphicsScene : public QGraphicsScene
 {
@@ -31,8 +32,10 @@ private:
     QColor cl = Qt::blue;
     QRectF rect;
     QVector<QGraphicsRectItem*> rectitmv;
-    QVector<QRectF> rectv, rectv_b;
-    QVector<QColor> colorv, colorv_b;
+    QVector<QRectF> rectv;
+    QVector<QColor> colorv;
+    QStack<QVector<QRectF>> rectv_b;
+    QStack<QVector<QColor>> colorv_b;
 };
 
 #endif // GRAPHICSSCENE_H

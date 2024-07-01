@@ -34,8 +34,8 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     if (m_currentRect && event->button() == Qt::LeftButton) {
-        rectv_b = rectv;
-        colorv_b = colorv;
+        rectv_b.push(rectv);
+        colorv_b.push(colorv);
         rectitmv.push_back(m_currentRect);
         rectv.push_back(rect);
         colorv.push_back(cl);
@@ -70,6 +70,7 @@ void GraphicsScene::loadFromFile(QString fileName)
         {
             m_currentRect = addRect(rectv[i]);
             m_currentRect->setBrush(colorv[i]);
+            rectitmv.push_back(m_currentRect);
         }
         file.close();
     }
@@ -77,6 +78,8 @@ void GraphicsScene::loadFromFile(QString fileName)
 
 void GraphicsScene::undo()
 {
+    if (!rectv_b.isEmpty())
+    {
     for (int i = 0; i < rectitmv.size(); i++)
     {
         removeItem(rectitmv[i]);
@@ -85,9 +88,13 @@ void GraphicsScene::undo()
     rectv.clear();
     colorv.clear();
     rectitmv.clear();
-    for (int i = 0; i < rectv_b.size(); i++)
+    rectv = rectv_b.pop();
+    colorv = colorv_b.pop();
+    for (int i = 0; i < rectv.size(); i++)
     {
-        m_currentRect = addRect(rectv_b[i]);
-        m_currentRect->setBrush(colorv_b[i]);
+        m_currentRect = addRect(rectv[i]);
+        m_currentRect->setBrush(colorv[i]);
+        rectitmv.push_back(m_currentRect);
+    }
     }
 }
