@@ -13,7 +13,10 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         m_startPos = event->scenePos();
         m_currentRect = addRect(m_startPos.x(), m_startPos.y(), 0, 0);
-        m_currentRect->setBrush(cl);
+        if (fillbgr)
+         m_currentRect->setBrush(cl);
+        else
+            m_currentRect->setPen(cl);
     }
     }
     if (primit == 2)
@@ -288,4 +291,9 @@ void GraphicsScene::undo()
 void GraphicsScene::changePrimitive(int a)
 {
     primit = a;
+}
+
+void GraphicsScene::bgrf(bool fd)
+{
+    fillbgr = fd;
 }

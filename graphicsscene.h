@@ -57,6 +57,8 @@ public:
 
     void changePrimitive(int);
 
+    void bgrf(bool);
+
 private:
     QPointF m_startPos;
     QGraphicsRectItem *m_currentRect = nullptr;
@@ -96,6 +98,7 @@ private:
         QColor cll;
     };
     QVector<ellipseinfo> elsave;
+    bool fillbgr = false;
 };
 
 #endif // GRAPHICSSCENE_H

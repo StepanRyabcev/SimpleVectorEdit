@@ -39,11 +39,14 @@ private slots:
 
     void on_choosecolor_clicked();
 
+    void on_fillbgr_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;
     GraphicsScene *scene;
     QString fileName, fileName_b;
     int primit = 1; //1 - прямоугольник, 2 - ромб
+    bool fillbgr = false;
 };
 #endif // MAINWINDOW_H

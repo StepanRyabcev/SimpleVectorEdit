@@ -75,6 +75,7 @@ void MainWindow::clear()
     scene->ChangeColor(cl);
     scene->changePrimitive(primit);
     ui->graphicsView->setScene(scene);
+    scene->bgrf(fillbgr);
     ui->graphicsView->show();
 }
 
@@ -118,5 +119,12 @@ void MainWindow::on_choosecolor_clicked()
     QPixmap pixmap(ui->currentcolor->size());
     pixmap.fill(cl);
     ui->currentcolor->setPixmap(pixmap);
+}
+
+
+void MainWindow::on_fillbgr_stateChanged(int arg1)
+{
+    fillbgr = (bool)arg1;
+    scene->bgrf(fillbgr);
 }
 
