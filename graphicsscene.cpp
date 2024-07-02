@@ -115,7 +115,10 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             elsave.last().h = height;
             elsave.last().w = width;
             elsave.last().cll = cl;
-            ellipseItem->setBrush(QBrush(cl));
+            if (fillbgr)
+                ellipseItem->setBrush(QBrush(cl));
+            else
+                ellipseItem->setPen(cl);
         }
     }
 }

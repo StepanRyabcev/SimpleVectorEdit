@@ -36,7 +36,10 @@ private:
             m_diamondItemv[diam] = new QGraphicsPolygonItem(diamond);
             diamitemsv[diam] = b;
         }
-        m_diamondItemv[diam]->setBrush(QBrush(cl));
+        if (fillbgr)
+            m_diamondItemv[diam]->setBrush(QBrush(cl));
+        else
+            m_diamondItemv[diam]->setPen(cl);
         addItem(m_diamondItemv[diam]);
     }
 
