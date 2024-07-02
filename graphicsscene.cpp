@@ -40,6 +40,7 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             ellipseinfo a;
             QPointF position = event->scenePos();
             ellipseItem = addEllipse(position.x(), position.y(), 0, 0);
+            pointers.push(ellipseItem);
             a.x = position.x();
             a.y = position.y();
             elsave.push_back(a);
@@ -85,7 +86,8 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
         if ((event->buttons() & Qt::LeftButton) && isDrawing)
         {
             QPen pen(cl, 2, Qt::SolidLine, Qt::RoundCap);
-            addLine(lastPoint.x(), lastPoint.y(), event->scenePos().x(), event->scenePos().y(), pen);
+            QGraphicsLineItem *ln = addLine(lastPoint.x(), lastPoint.y(), event->scenePos().x(), event->scenePos().y(), pen);
+            linep.push(ln);
             lineinfo aa;
             aa.x1 = lastPoint.x();
             aa.y1 = lastPoint.y();
@@ -94,6 +96,7 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             aa.pen = pen;
             linesv.push_back(aa);
             lastPoint = event->scenePos();
+            undotype.push(3);
         }
     }
     if (primit == 4)
@@ -146,7 +149,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     {
         if (event->button() == Qt::LeftButton)
         {
-
+            undotype.push(4);
         }
     }
 }
@@ -260,6 +263,24 @@ void GraphicsScene::undo()
             delete m_diamondItemv.last();
             m_diamondItemv.removeLast();
             diam--;
+        }
+        if (fl == 3)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (!linep.isEmpty())
+                {
+            QGraphicsLineItem *a = linep.pop();
+            delete a;
+            linesv.removeLast();
+                }
+            }
+        }
+        if (fl == 4)
+        {
+            QGraphicsEllipseItem* a = pointers.pop();
+            delete a;
+            elsave.removeLast();
         }
     }
 }

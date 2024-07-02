@@ -86,7 +86,9 @@ private:
         int x1, y1, x2, y2;
     };
     QVector<lineinfo> linesv;
+    QStack<QGraphicsLineItem*> linep;
     QGraphicsEllipseItem *ellipseItem;
+    QStack<QGraphicsEllipseItem*> pointers;
     struct ellipseinfo
     {
         int x, y;
