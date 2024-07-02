@@ -80,6 +80,12 @@ private:
     int diam = -1;
     bool isDrawing;
     QPointF lastPoint;
+    struct lineinfo
+    {
+        QPen pen;
+        int x1, y1, x2, y2;
+    };
+    QVector<lineinfo> linesv;
 };
 
 #endif // GRAPHICSSCENE_H

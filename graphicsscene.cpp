@@ -74,6 +74,13 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
         {
             QPen pen(cl, 2, Qt::SolidLine, Qt::RoundCap);
             addLine(lastPoint.x(), lastPoint.y(), event->scenePos().x(), event->scenePos().y(), pen);
+            lineinfo aa;
+            aa.x1 = lastPoint.x();
+            aa.y1 = lastPoint.y();
+            aa.x2 = event->scenePos().x();
+            aa.y2 = event->scenePos().y();
+            aa.pen = pen;
+            linesv.push_back(aa);
             lastPoint = event->scenePos();
         }
     }
@@ -126,6 +133,10 @@ void GraphicsScene::saveToFile(QString fileName)
         qDebug() << n;
         for (int i = 0; i < diamitemsv.size(); i++)
             stream << diamitemsv[i].x << diamitemsv[i].y << diamitemsv[i].h << diamitemsv[i].w << diamitemsv[i].cll;
+        int nn = linesv.size();
+        stream << nn;
+        for (int i = 0; i < nn; i++)
+            stream << linesv[i].x1 << linesv[i].y1 << linesv[i].x2 << linesv[i].y2 << linesv[i].pen;
         file.close();
     }
 }
@@ -154,6 +165,15 @@ void GraphicsScene::loadFromFile(QString fileName)
             ChangeColor(b.cll);
             diam++;
             drawDiamond(b.x, b.y, b.h, b.w);
+        }
+        int nn;
+        stream >> nn;
+        lineinfo aa;
+        for (int i = 0; i < nn; i++)
+        {
+            stream >> aa.x1 >> aa.y1 >> aa.x2 >> aa.y2 >> aa.pen;
+            addLine(aa.x1, aa.y1, aa.x2, aa.y2, aa.pen);
+            linesv.push_back(aa);
         }
         file.close();
     }
