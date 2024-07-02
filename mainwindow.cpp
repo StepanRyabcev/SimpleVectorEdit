@@ -69,6 +69,8 @@ void MainWindow::clear()
 {
     delete scene;
     scene = new GraphicsScene;
+    scene->ChangeColor(cl);
+    scene->changePrimitive(primit);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
 }
@@ -82,24 +84,28 @@ void MainWindow::rect()
 {
     primit = 1;
     scene->changePrimitive(primit);
+    ui->primit->setText("Прямоугольник");
 }
 
 void MainWindow::diamond()
 {
     primit = 2;
     scene->changePrimitive(primit);
+    ui->primit->setText("Ромб");
 }
 
 void MainWindow::simple()
 {
     primit = 3;
     scene->changePrimitive(primit);
+    ui->primit->setText("Простое рисование");
 }
 
 void MainWindow::ellipse()
 {
     primit = 4;
     scene->changePrimitive(primit);
+    ui->primit->setText("Овал");
 }
 
 void MainWindow::on_choosecolor_clicked()

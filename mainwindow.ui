@@ -37,6 +37,19 @@
      <string>Выбрать цвет</string>
     </property>
    </widget>
+   <widget class="QLabel" name="primit">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>520</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Прямоугольник</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
