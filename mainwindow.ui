@@ -24,100 +24,17 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="white">
+   <widget class="QPushButton" name="choosecolor">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>510</y>
-      <width>31</width>
+      <x>20</x>
+      <y>520</y>
+      <width>111</width>
       <height>29</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="black">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>510</y>
-      <width>31</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="blue">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>510</y>
-      <width>31</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="green">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>510</y>
-      <width>31</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="yellow">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>510</y>
-      <width>31</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="red">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>510</y>
-      <width>31</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
+     <string>Выбрать цвет</string>
     </property>
    </widget>
   </widget>

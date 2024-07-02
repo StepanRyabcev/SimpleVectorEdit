@@ -19,18 +19,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_white_clicked();
-
-    void on_black_clicked();
-
-    void on_blue_clicked();
-
-    void on_green_clicked();
-
-    void on_yellow_clicked();
-
-    void on_red_clicked();
-
     void save();
 
     void load();
@@ -48,6 +36,8 @@ private slots:
     void simple();
 
     void ellipse();
+
+    void on_choosecolor_clicked();
 
 private:
     Ui::MainWindow *ui;
