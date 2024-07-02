@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->simple, &QAction::triggered, this, MainWindow::simple);
     QObject::connect(ui->ellipse, &QAction::triggered, this, MainWindow::ellipse);
     ui->graphicsView->show();
+    QPixmap pixmap(ui->currentcolor->size());
+    pixmap.fill(cl);
+    ui->currentcolor->setPixmap(pixmap);
     ui->savequick->setEnabled(false);
 }
 
@@ -112,5 +115,8 @@ void MainWindow::on_choosecolor_clicked()
 {
     cl = QColorDialog::getColor(cl, nullptr, "Выберите цвет", QColorDialog::DontUseNativeDialog);
     scene->ChangeColor(cl);
+    QPixmap pixmap(ui->currentcolor->size());
+    pixmap.fill(cl);
+    ui->currentcolor->setPixmap(pixmap);
 }
 

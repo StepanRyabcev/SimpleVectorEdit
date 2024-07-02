@@ -42,12 +42,38 @@
      <rect>
       <x>190</x>
       <y>520</y>
-      <width>241</width>
+      <width>151</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>Прямоугольник</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cuurcl">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>520</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Текущий цвет</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentcolor">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>520</y>
+      <width>31</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
