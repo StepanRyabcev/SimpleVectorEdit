@@ -23,7 +23,14 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             m_startPos = event->scenePos();
             m_drawing = true;
             diam++;
-            diamundo.push(m_diamondItemv);
+        }
+    }
+    if (primit == 3)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            isDrawing = true;
+            lastPoint = event->scenePos();
         }
     }
 }
@@ -61,6 +68,15 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             drawDiamond(m_startPos.x(), m_startPos.y(), width, height);
     }
     }
+    if (primit == 3)
+    {
+        if ((event->buttons() & Qt::LeftButton) && isDrawing)
+        {
+            QPen pen(cl, 2, Qt::SolidLine, Qt::RoundCap);
+            addLine(lastPoint.x(), lastPoint.y(), event->scenePos().x(), event->scenePos().y(), pen);
+            lastPoint = event->scenePos();
+        }
+    }
 }
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
@@ -82,6 +98,13 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         {
             m_drawing = false;
             undotype.push(2 );
+        }
+    }
+    if (primit == 3)
+    {
+        if (event->button() == Qt::LeftButton && isDrawing)
+        {
+            isDrawing = false;
         }
     }
 }

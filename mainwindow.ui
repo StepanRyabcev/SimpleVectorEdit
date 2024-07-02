@@ -151,6 +151,7 @@
     </property>
     <addaction name="rect"/>
     <addaction name="diamond"/>
+    <addaction name="simple"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
@@ -190,6 +191,11 @@
   <action name="diamond">
    <property name="text">
     <string>Ромб</string>
+   </property>
+  </action>
+  <action name="simple">
+   <property name="text">
+    <string>Простое рисование</string>
    </property>
   </action>
  </widget>

@@ -45,6 +45,8 @@ private slots:
 
     void diamond();
 
+    void simple();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;

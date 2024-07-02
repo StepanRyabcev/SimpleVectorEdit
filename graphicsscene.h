@@ -76,9 +76,10 @@ private:
         QColor cll;
     };
     QVector<diamsv> diamitemsv;
-    QStack<QVector<QGraphicsPolygonItem*>> diamundo;
     bool m_drawing;
     int diam = -1;
+    bool isDrawing;
+    QPointF lastPoint;
 };
 
 #endif // GRAPHICSSCENE_H
