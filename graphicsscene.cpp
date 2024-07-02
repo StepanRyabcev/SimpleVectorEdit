@@ -50,8 +50,8 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
         if (m_drawing && event->buttons() & Qt::LeftButton)
         {
             QPointF currentPos = event->scenePos();
-            qreal width = std::abs(currentPos.x() - m_startPos.x());
-            qreal height = std::abs(currentPos.y() - m_startPos.y());
+            qreal width = std::abs(currentPos.x() - m_startPos.x()) * 2;
+            qreal height = std::abs(currentPos.y() - m_startPos.y()) * 2;
             if (!(m_diamondItemv.size() < diam + 1))
             {
                 removeItem(m_diamondItemv[diam]);
@@ -79,10 +79,6 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         if (event->button() == Qt::LeftButton)
         {
             m_drawing = false;
-            //m_diamondItemv.push_front(m_diamondItem);
-            //removeItem(m_diamondItem);
-            //delete m_diamondItem;
-            //addItem(m_diamondItemv[0]);
         }
     }
 }
@@ -99,6 +95,11 @@ void GraphicsScene::saveToFile(QString fileName)
     {
         QDataStream stream(&file);
         stream << rectv << colorv;
+        int n = diamitemsv.size();
+        stream << n;
+        qDebug() << n;
+        for (int i = 0; i < diamitemsv.size(); i++)
+            stream << diamitemsv[i].x << diamitemsv[i].y << diamitemsv[i].h << diamitemsv[i].w << diamitemsv[i].cll;
         file.close();
     }
 }
@@ -109,12 +110,24 @@ void GraphicsScene::loadFromFile(QString fileName)
     if (file.open(QIODevice::ReadOnly))
     {
         QDataStream stream(&file);
+        int n;
         stream >> rectv >> colorv;
         for (int i = 0; i < rectv.size(); i++)
         {
             m_currentRect = addRect(rectv[i]);
             m_currentRect->setBrush(colorv[i]);
             rectitmv.push_back(m_currentRect);
+        }
+        stream >> n;
+        qDebug() << n;
+        for (int i = 0; i < n; i++)
+        {
+            diamsv b;
+            stream >> b.x >> b.y >> b.h >> b.w >> b.cll ;
+            diamitemsv.push_back(b);
+            ChangeColor(b.cll);
+            diam++;
+            drawDiamond(b.x, b.y, b.h, b.w);
         }
         file.close();
     }

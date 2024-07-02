@@ -19,13 +19,23 @@ private:
                 << QPointF(x + width, y + height / 2)
                 << QPointF(x + width / 2, y + height)
                 << QPointF(x, y + height / 2);
+        diamsv b;
+        b.x = x;
+        b.y = y;
+        b.w = width;
+        b.h = height;
+        b.cll = cl;
         if (m_diamondItemv.size() < diam + 1)
         {
             QGraphicsPolygonItem* a = new QGraphicsPolygonItem(diamond);
             m_diamondItemv.push_back(a);
+            diamitemsv.push_back(b);
         }
         else
+        {
             m_diamondItemv[diam] = new QGraphicsPolygonItem(diamond);
+            diamitemsv[diam] = b;
+        }
         m_diamondItemv[diam]->setBrush(QBrush(cl));
         addItem(m_diamondItemv[diam]);
     }
@@ -59,6 +69,12 @@ private:
     QStack<QVector<QColor>> colorv_b;
     int primit = 1; //1 - прямоугольник, 2 - ромб
     QVector<QGraphicsPolygonItem*> m_diamondItemv;
+    struct diamsv
+    {
+        double x, y, h, w;
+        QColor cll;
+    };
+    QVector<diamsv> diamitemsv;
     QGraphicsPolygonItem*  m_diamondItem;
     bool m_drawing;
     int diam = -1;
