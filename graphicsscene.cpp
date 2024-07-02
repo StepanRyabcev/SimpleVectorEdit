@@ -23,6 +23,7 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             m_startPos = event->scenePos();
             m_drawing = true;
             diam++;
+            diamundo.push(m_diamondItemv);
         }
     }
 }
@@ -68,6 +69,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     if (m_currentRect && event->button() == Qt::LeftButton) {
         rectv_b.push(rectv);
         colorv_b.push(colorv);
+        undotype.push(1);
         rectitmv.push_back(m_currentRect);
         rectv.push_back(rect);
         colorv.push_back(cl);
@@ -79,6 +81,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         if (event->button() == Qt::LeftButton)
         {
             m_drawing = false;
+            undotype.push(2 );
         }
     }
 }
@@ -135,6 +138,11 @@ void GraphicsScene::loadFromFile(QString fileName)
 
 void GraphicsScene::undo()
 {
+    if (!(undotype.isEmpty()))
+    {
+        int fl = undotype.pop();
+        if (fl == 1)
+        {
     if (!rectv_b.isEmpty())
     {
     for (int i = 0; i < rectitmv.size(); i++)
@@ -153,6 +161,14 @@ void GraphicsScene::undo()
         m_currentRect->setBrush(colorv[i]);
         rectitmv.push_back(m_currentRect);
     }
+    }
+        }
+        if (fl == 2)
+        {
+            delete m_diamondItemv.last();
+            m_diamondItemv.removeLast();
+            diam--;
+        }
     }
 }
 

@@ -67,6 +67,7 @@ private:
     QVector<QColor> colorv;
     QStack<QVector<QRectF>> rectv_b;
     QStack<QVector<QColor>> colorv_b;
+    QStack<int> undotype;
     int primit = 1; //1 - прямоугольник, 2 - ромб
     QVector<QGraphicsPolygonItem*> m_diamondItemv;
     struct diamsv
@@ -75,7 +76,7 @@ private:
         QColor cll;
     };
     QVector<diamsv> diamitemsv;
-    QGraphicsPolygonItem*  m_diamondItem;
+    QStack<QVector<QGraphicsPolygonItem*>> diamundo;
     bool m_drawing;
     int diam = -1;
 };
