@@ -20,10 +20,9 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     {
         if (event->button() == Qt::LeftButton)
         {
-            QPointF position = event->scenePos();
-            double a = position.x();
-            double b = position.y();
-            drawDiamond(a, b, 50.0, 50.0); // Размеры ромба по умолчанию: 50x50
+            m_startPos = event->scenePos();
+            m_drawing = true;
+            diam++;
         }
     }
 }
@@ -48,11 +47,18 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     }
     if (primit == 2)
     {
-        if (event->buttons() & Qt::LeftButton)
+        if (m_drawing && event->buttons() & Qt::LeftButton)
         {
-            QPointF position = event->scenePos();
-            drawDiamond(position.x(), position.y(), 50, 50); // Размеры ромба по умолчанию: 50x50
-        }
+            QPointF currentPos = event->scenePos();
+            qreal width = std::abs(currentPos.x() - m_startPos.x());
+            qreal height = std::abs(currentPos.y() - m_startPos.y());
+            if (!(m_diamondItemv.size() < diam + 1))
+            {
+                removeItem(m_diamondItemv[diam]);
+                delete m_diamondItemv[diam];
+            }
+            drawDiamond(m_startPos.x(), m_startPos.y(), width, height);
+    }
     }
 }
 
@@ -67,6 +73,17 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         colorv.push_back(cl);
         m_currentRect = nullptr;
     }
+    }
+    if (primit == 2)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            m_drawing = false;
+            //m_diamondItemv.push_front(m_diamondItem);
+            //removeItem(m_diamondItem);
+            //delete m_diamondItem;
+            //addItem(m_diamondItemv[0]);
+        }
     }
 }
 

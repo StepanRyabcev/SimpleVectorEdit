@@ -19,10 +19,15 @@ private:
                 << QPointF(x + width, y + height / 2)
                 << QPointF(x + width / 2, y + height)
                 << QPointF(x, y + height / 2);
-
-        QGraphicsPolygonItem *diamondItem = new QGraphicsPolygonItem(diamond);
-        diamondItem->setBrush(QBrush(cl));
-        addItem(diamondItem);
+        if (m_diamondItemv.size() < diam + 1)
+        {
+            QGraphicsPolygonItem* a = new QGraphicsPolygonItem(diamond);
+            m_diamondItemv.push_back(a);
+        }
+        else
+            m_diamondItemv[diam] = new QGraphicsPolygonItem(diamond);
+        m_diamondItemv[diam]->setBrush(QBrush(cl));
+        addItem(m_diamondItemv[diam]);
     }
 
 public:
@@ -53,7 +58,10 @@ private:
     QStack<QVector<QRectF>> rectv_b;
     QStack<QVector<QColor>> colorv_b;
     int primit = 1; //1 - прямоугольник, 2 - ромб
-
+    QVector<QGraphicsPolygonItem*> m_diamondItemv;
+    QGraphicsPolygonItem*  m_diamondItem;
+    bool m_drawing;
+    int diam = -1;
 };
 
 #endif // GRAPHICSSCENE_H
