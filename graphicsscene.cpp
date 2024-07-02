@@ -37,8 +37,12 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     {
         if (event->button() == Qt::LeftButton)
         {
+            ellipseinfo a;
             QPointF position = event->scenePos();
-            ellipseItem = addEllipse(position.x(), position.y(), 100, 50);
+            ellipseItem = addEllipse(position.x(), position.y(), 0, 0);
+            a.x = position.x();
+            a.y = position.y();
+            elsave.push_back(a);
         }
     }
 }
@@ -100,6 +104,11 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             qreal width = newPos.x() - ellipseItem->pos().x();
             qreal height = newPos.y() - ellipseItem->pos().y();
             ellipseItem->setRect(ellipseItem->pos().x(), ellipseItem->pos().y(), width, height);
+            elsave.last().x = ellipseItem->pos().x();
+            elsave.last().y = ellipseItem->pos().y();
+            elsave.last().h = height;
+            elsave.last().w = width;
+            elsave.last().cll = cl;
             ellipseItem->setBrush(QBrush(cl));
         }
     }
@@ -133,6 +142,13 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
             isDrawing = false;
         }
     }
+    if (primit == 4)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+
+        }
+    }
 }
 
 void GraphicsScene::ChangeColor(QColor a)
@@ -156,6 +172,10 @@ void GraphicsScene::saveToFile(QString fileName)
         stream << nn;
         for (int i = 0; i < nn; i++)
             stream << linesv[i].x1 << linesv[i].y1 << linesv[i].x2 << linesv[i].y2 << linesv[i].pen;
+        int nnn = elsave.size();
+        stream << nnn;
+        for (int i = 0; i < nnn; i++)
+            stream << elsave[i].x << elsave[i].y << elsave[i].h << elsave[i].w << elsave[i].cll;
         file.close();
     }
 }
@@ -193,6 +213,16 @@ void GraphicsScene::loadFromFile(QString fileName)
             stream >> aa.x1 >> aa.y1 >> aa.x2 >> aa.y2 >> aa.pen;
             addLine(aa.x1, aa.y1, aa.x2, aa.y2, aa.pen);
             linesv.push_back(aa);
+        }
+        int nnn;
+        stream >> nnn;
+        ellipseinfo aaa;
+        for (int i = 0; i < nnn; i++)
+        {
+            stream >> aaa.x >> aaa.y >> aaa.h >> aaa.w >> aaa.cll;
+            ellipseItem = addEllipse(aaa.x, aaa.y, aaa.w, aaa.h);
+            cl = aaa.cll;
+            ellipseItem->setBrush(cl);
         }
         file.close();
     }

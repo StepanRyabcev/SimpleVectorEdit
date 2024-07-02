@@ -87,6 +87,13 @@ private:
     };
     QVector<lineinfo> linesv;
     QGraphicsEllipseItem *ellipseItem;
+    struct ellipseinfo
+    {
+        int x, y;
+        qreal h, w;
+        QColor cll;
+    };
+    QVector<ellipseinfo> elsave;
 };
 
 #endif // GRAPHICSSCENE_H
