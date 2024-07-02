@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->rect, &QAction::triggered, this, MainWindow::rect);
     QObject::connect(ui->diamond, &QAction::triggered, this, MainWindow::diamond);
     QObject::connect(ui->simple, &QAction::triggered, this, MainWindow::simple);
+    QObject::connect(ui->ellipse, &QAction::triggered, this, MainWindow::ellipse);
     ui->graphicsView->show();
     QPalette palwhite = ui->white->palette();
     palwhite.setColor(QPalette::Button, QColor(Qt::white));
@@ -158,5 +159,11 @@ void MainWindow::diamond()
 void MainWindow::simple()
 {
     primit = 3;
+    scene->changePrimitive(primit);
+}
+
+void MainWindow::ellipse()
+{
+    primit = 4;
     scene->changePrimitive(primit);
 }

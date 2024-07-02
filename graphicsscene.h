@@ -86,6 +86,7 @@ private:
         int x1, y1, x2, y2;
     };
     QVector<lineinfo> linesv;
+    QGraphicsEllipseItem *ellipseItem;
 };
 
 #endif // GRAPHICSSCENE_H

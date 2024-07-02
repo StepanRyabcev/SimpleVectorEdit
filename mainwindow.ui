@@ -151,6 +151,7 @@
     </property>
     <addaction name="rect"/>
     <addaction name="diamond"/>
+    <addaction name="ellipse"/>
     <addaction name="simple"/>
    </widget>
    <addaction name="menu"/>
@@ -196,6 +197,11 @@
   <action name="simple">
    <property name="text">
     <string>Простое рисование</string>
+   </property>
+  </action>
+  <action name="ellipse">
+   <property name="text">
+    <string>Овал</string>
    </property>
   </action>
  </widget>

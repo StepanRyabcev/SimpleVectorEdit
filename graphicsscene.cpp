@@ -33,6 +33,14 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             lastPoint = event->scenePos();
         }
     }
+    if (primit == 4)
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            QPointF position = event->scenePos();
+            ellipseItem = addEllipse(position.x(), position.y(), 100, 50);
+        }
+    }
 }
 
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
@@ -82,6 +90,17 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             aa.pen = pen;
             linesv.push_back(aa);
             lastPoint = event->scenePos();
+        }
+    }
+    if (primit == 4)
+    {
+        if (ellipseItem && event->buttons() == Qt::LeftButton)
+        {
+            QPointF newPos = event->scenePos();
+            qreal width = newPos.x() - ellipseItem->pos().x();
+            qreal height = newPos.y() - ellipseItem->pos().y();
+            ellipseItem->setRect(ellipseItem->pos().x(), ellipseItem->pos().y(), width, height);
+            ellipseItem->setBrush(QBrush(cl));
         }
     }
 }

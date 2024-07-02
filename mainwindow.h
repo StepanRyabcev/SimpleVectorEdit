@@ -47,6 +47,8 @@ private slots:
 
     void simple();
 
+    void ellipse();
+
 private:
     Ui::MainWindow *ui;
     QColor cl = Qt::blue;
